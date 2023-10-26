@@ -1,0 +1,17 @@
+{
+	"name": "DS_SQL_Load",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL_load",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "ADLSingest"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,147 @@
+{
+	"name": "PL_Orchestrate_all",
+	"properties": {
+		"activities": [
+			{
+				"name": "Extract",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_Ingest_Incremental_Load_copy1",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Transform",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Extract",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_Synaps_Transform",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Load",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Transform",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_ADLS_to_SQL",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Extract",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-15.eastus.logic.azure.com:443/workflows/50b5181a5b024aa3aace27a0c456008a/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=6V1Ea9evG2k5dy67Jal8rlSTuQ7NhcileemZmf_4LQc",
+					"method": "POST",
+					"body": {
+						"value": "{\n\n    'pipelinename': '@{pipeline().Pipeline}',\n    'DataFactory Name': '@{pipeline().DataFactory}',\n    'RunID': '@{pipeline().RunId}'\n\n}",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Web1_copy1",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Transform",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-15.eastus.logic.azure.com:443/workflows/50b5181a5b024aa3aace27a0c456008a/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=6V1Ea9evG2k5dy67Jal8rlSTuQ7NhcileemZmf_4LQc",
+					"method": "POST",
+					"body": {
+						"value": "{\n\n    'pipelinename': '@{pipeline().Pipeline}',\n    'DataFactory Name': '@{pipeline().DataFactory}',\n    'RunID': '@{pipeline().RunId}'\n\n}",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Web1_copy1_copy1",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Load",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-15.eastus.logic.azure.com:443/workflows/50b5181a5b024aa3aace27a0c456008a/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=6V1Ea9evG2k5dy67Jal8rlSTuQ7NhcileemZmf_4LQc",
+					"method": "POST",
+					"body": {
+						"value": "{\n\n    'pipelinename': '@{pipeline().Pipeline}',\n    'DataFactory Name': '@{pipeline().DataFactory}',\n    'RunID': '@{pipeline().RunId}'\n\n}",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-10-25T16:52:35Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

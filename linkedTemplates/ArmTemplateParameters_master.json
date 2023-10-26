@@ -1,0 +1,45 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "value": "ott-datafactory-zaidi-01"
+        },
+        "LS_FS_Ingest_password": {
+            "value": ""
+        },
+        "LS_Onprem_File_password": {
+            "value": ""
+        },
+        "LS_SQL_load_connectionString": {
+            "value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=ottserver2023zaid.database.windows.net;Initial Catalog=ott-db-zaid-2023;User ID=sqladmin"
+        },
+        "LS_KeyVault_properties_typeProperties_baseUrl": {
+            "value": "https://ottvaultzaid011.vault.azure.net/"
+        },
+        "LS_FS_Ingest_properties_typeProperties_host": {
+            "value": "C:\\Users\\zaid\\Downloads\\Host"
+        },
+        "LS_FS_Ingest_properties_typeProperties_userId": {
+            "value": "zaid"
+        },
+        "LS_Onprem_File_properties_typeProperties_host": {
+            "value": "C:\\Users\\zaid\\Downloads\\Host"
+        },
+        "LS_Onprem_File_properties_typeProperties_userId": {
+            "value": "zaid"
+        },
+        "LS_adls_ingest_properties_typeProperties_url": {
+            "value": "https://ottadls01zaid.dfs.core.windows.net"
+        },
+        "LS_Notebook_Transform_properties_typeProperties_endpoint": {
+            "value": "https://ott-synapse-011-zaid.dev.azuresynapse.net"
+        },
+        "containerUri": {
+            "value": ""
+        },
+        "containerSasToken": {
+            "value": ""
+        }
+    }
+}

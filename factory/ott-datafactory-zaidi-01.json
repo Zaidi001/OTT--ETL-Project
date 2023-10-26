@@ -1,0 +1,9 @@
+{
+	"name": "ott-datafactory-zaidi-01",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "5b890fb2-2005-4eef-a191-c5d70b62f91f",
+		"tenantId": "35f3b09a-837d-478e-8ab0-e18826ebdea0"
+	}
+}

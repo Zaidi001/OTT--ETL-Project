@@ -1,0 +1,17 @@
+{
+	"name": "LS_Onprem_File",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "FileServer",
+		"typeProperties": {
+			"host": "C:\\Users\\zaid\\Downloads\\Host",
+			"userId": "zaid",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI4NzlmMDNlMy03ZWRiLTQxOTgtODNkMC01NTlhZWFkN2Y0YzEiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "SelfHostedAzureVM",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

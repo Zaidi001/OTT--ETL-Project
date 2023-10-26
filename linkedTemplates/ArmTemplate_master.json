@@ -1,0 +1,133 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "type": "string",
+            "metadata": "Data Factory name",
+            "defaultValue": "ott-datafactory-zaidi-01"
+        },
+        "LS_FS_Ingest_password": {
+            "type": "secureString",
+            "metadata": "Secure string for 'password' of 'LS_FS_Ingest'"
+        },
+        "LS_Onprem_File_password": {
+            "type": "secureString",
+            "metadata": "Secure string for 'password' of 'LS_Onprem_File'"
+        },
+        "LS_SQL_load_connectionString": {
+            "type": "secureString",
+            "metadata": "Secure string for 'connectionString' of 'LS_SQL_load'",
+            "defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=ottserver2023zaid.database.windows.net;Initial Catalog=ott-db-zaid-2023;User ID=sqladmin"
+        },
+        "LS_KeyVault_properties_typeProperties_baseUrl": {
+            "type": "string",
+            "defaultValue": "https://ottvaultzaid011.vault.azure.net/"
+        },
+        "LS_FS_Ingest_properties_typeProperties_host": {
+            "type": "string",
+            "defaultValue": "C:\\Users\\zaid\\Downloads\\Host"
+        },
+        "LS_FS_Ingest_properties_typeProperties_userId": {
+            "type": "string",
+            "defaultValue": "zaid"
+        },
+        "LS_Onprem_File_properties_typeProperties_host": {
+            "type": "string",
+            "defaultValue": "C:\\Users\\zaid\\Downloads\\Host"
+        },
+        "LS_Onprem_File_properties_typeProperties_userId": {
+            "type": "string",
+            "defaultValue": "zaid"
+        },
+        "LS_adls_ingest_properties_typeProperties_url": {
+            "type": "string",
+            "defaultValue": "https://ottadls01zaid.dfs.core.windows.net"
+        },
+        "LS_Notebook_Transform_properties_typeProperties_endpoint": {
+            "type": "string",
+            "defaultValue": "https://ott-synapse-011-zaid.dev.azuresynapse.net"
+        },
+        "containerUri": {
+            "type": "string",
+            "metadata": "URI to storage account containing linked ARM templates"
+        },
+        "containerSasToken": {
+            "type": "string",
+            "metadata": "Sas token to storage account containing linked ARM templates"
+        }
+    },
+    "variables": {
+        "factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+    },
+    "resources": [
+        {
+            "name": "ott-datafactory-zaidi-01_ArmTemplate_0",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2018-02-01",
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+                    "uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "factoryName": {
+                        "value": "[parameters('factoryName')]"
+                    },
+                    "LS_FS_Ingest_password": {
+                        "value": "[parameters('LS_FS_Ingest_password')]"
+                    },
+                    "LS_Onprem_File_password": {
+                        "value": "[parameters('LS_Onprem_File_password')]"
+                    },
+                    "LS_SQL_load_connectionString": {
+                        "value": "[parameters('LS_SQL_load_connectionString')]"
+                    },
+                    "LS_KeyVault_properties_typeProperties_baseUrl": {
+                        "value": "[parameters('LS_KeyVault_properties_typeProperties_baseUrl')]"
+                    },
+                    "LS_Notebook_Transform_properties_typeProperties_endpoint": {
+                        "value": "[parameters('LS_Notebook_Transform_properties_typeProperties_endpoint')]"
+                    },
+                    "LS_FS_Ingest_properties_typeProperties_host": {
+                        "value": "[parameters('LS_FS_Ingest_properties_typeProperties_host')]"
+                    },
+                    "LS_FS_Ingest_properties_typeProperties_userId": {
+                        "value": "[parameters('LS_FS_Ingest_properties_typeProperties_userId')]"
+                    },
+                    "LS_Onprem_File_properties_typeProperties_host": {
+                        "value": "[parameters('LS_Onprem_File_properties_typeProperties_host')]"
+                    },
+                    "LS_Onprem_File_properties_typeProperties_userId": {
+                        "value": "[parameters('LS_Onprem_File_properties_typeProperties_userId')]"
+                    },
+                    "LS_adls_ingest_properties_typeProperties_url": {
+                        "value": "[parameters('LS_adls_ingest_properties_typeProperties_url')]"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "ott-datafactory-zaidi-01_ArmTemplate_1",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2018-02-01",
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+                    "uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "factoryName": {
+                        "value": "[parameters('factoryName')]"
+                    }
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Resources/deployments', 'ott-datafactory-zaidi-01_ArmTemplate_0')]"
+            ]
+        }
+    ]
+}

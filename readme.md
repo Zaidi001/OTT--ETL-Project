@@ -35,7 +35,7 @@ Developed an ETL pipeline for OTT platform data, focusing on data from popular p
 ## Transformation
 - Set up a link between Azure Datalake and Synapse Notebook, initiating a spark pool with three worker nodes for optimized code execution.
 - Undertook data cleaning tasks: managing NULL values, eliminating duplicates, modifying column types, and engineering features.
-- Stored the refined data back in Datalake and relayed it to the SQL database. [Full code available here](https://lnkd.in/eUi7QB-S).
+- Stored the refined data back in Datalake and relayed it to the SQL database. 
 
 ## Automation & Orchestration
 - Orchestrated pipelines for extraction, loading, and transformation.
